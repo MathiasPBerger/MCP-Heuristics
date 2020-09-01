@@ -10,7 +10,7 @@ function solve_MILP(D::Array{Float64, 2}, c::Float64, n::Float64, solver::String
   if solver == "Cbc"
     MILP_model = Model(optimizer_with_attributes(Cbc.Optimizer, "seconds" => 120., "allowableGap" => 5))
   elseif solver == "Gurobi"
-    MILP_model = Model(optimizer_with_attributes(Gurobi.Optimizer, "TimeLimit" => 360., "MIPGap" => 0.05))
+    MILP_model = Model(optimizer_with_attributes(Gurobi.Optimizer, "TimeLimit" => 3600., "MIPGap" => 0.05))
   else
       println("Please use Cbc or Gurobi")
       throw(ArgumentError)
@@ -88,10 +88,10 @@ function solve_IP(D::Array{Float64, 2}, c::Float64, n::Float64, solver::String, 
   L = size(D)[2]
 
   println("Building IP Model")
-  if solver == Cbc
-    IP_model = Model(optimizer_with_attributes(solver.Optimizer, "seconds" => timelimit, "allowableGap" => gap))
-  elseif solver == Gurobi
-    IP_model = Model(optimizer_with_attributes(solver.Optimizer, "TimeLimit" => timelimit, "MIPGap" => gap))
+  if solver == "Cbc"
+    IP_model = Model(optimizer_with_attributes(Cbc.Optimizer, "seconds" => timelimit, "allowableGap" => gap))
+  elseif solver == "Gurobi"
+    IP_model = Model(optimizer_with_attributes(Gurobi.Optimizer, "TimeLimit" => timelimit, "MIPGap" => gap))
   else
       println("Please use Cbc or Gurobi")
       throw(ArgumentError)
@@ -120,10 +120,10 @@ W = size(D)[1]
 L = size(D)[2]
 
 println("Warmstarting IP Model")
-if solver == Cbc
-  IP_model = Model(optimizer_with_attributes(solver.Optimizer, "seconds" => timelimit, "allowableGap" => gap))
-elseif solver == Gurobi
-  IP_model = Model(optimizer_with_attributes(solver.Optimizer, "TimeLimit" => timelimit, "MIPGap" => gap))
+if solver == "Cbc"
+  IP_model = Model(optimizer_with_attributes(Cbc.Optimizer, "seconds" => timelimit, "allowableGap" => gap))
+elseif solver == "Gurobi"
+  IP_model = Model(optimizer_with_attributes(Gurobi.Optimizer, "TimeLimit" => timelimit, "MIPGap" => gap))
 else
     println("Please use Cbc or Gurobi")
     throw(ArgumentError)

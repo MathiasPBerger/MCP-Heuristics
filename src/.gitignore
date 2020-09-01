@@ -1,0 +1,6 @@
+*.txt
+MCP_heuristics_archive.jl
+implementation_optimisation_archive.jl
+../data/
+../plots/
+../output/
