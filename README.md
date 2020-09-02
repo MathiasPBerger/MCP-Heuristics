@@ -15,3 +15,7 @@ Some of these algorithms, which are also used for submodular maximization, inclu
 - Simulated Annealing Local Search (Berger et al. 2020)
 
 - IP and MILP formulations, built in Julia JuMP, which can be combined with local search to produce better heuristics.
+
+The data used in the paper "Siting Renewable Generation Assets with Combinatorial Optimisation" can be downloaded from the following repository:
+
+https://dox.uliege.be/index.php/s/1XLvBJhaO106Cen
