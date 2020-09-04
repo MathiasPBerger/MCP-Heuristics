@@ -2,6 +2,38 @@ using JuMP
 using Cbc
 using Gurobi
 
+function solve_LP(D::Array{Float64, 2}, c::Float64, n::Float64, solver::String)
+
+  W = size(D)[1]
+  L = size(D)[2]
+
+  println("Building IP Model")
+  if solver == "Cbc"
+    IP_model = Model(Cbc.Optimizer)
+  elseif solver == "Gurobi"
+    IP_model = Model(Gurobi.Optimizer)
+  else
+      println("Please use Cbc or Gurobi")
+      throw(ArgumentError)
+  end
+
+  @variable(IP_model, 0 <= x[1:L] <= 1)
+  @variable(IP_model, 0 <= y[1:W] <= 1)
+
+  @constraint(IP_model, cardinality, sum(x) <= n)
+  @constraint(IP_model, covering, D * x .>= c * y)
+
+  @objective(IP_model, Max, sum(y))
+
+  optimize!(IP_model)
+
+  x_sol = value.(x)
+  y_sol = value.(y)
+
+  return x_sol, y_sol
+
+end
+
 function solve_MILP(D::Array{Float64, 2}, c::Float64, n::Float64, solver::String)
 
   W = size(D)[1]

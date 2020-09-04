@@ -20,12 +20,12 @@ The data used in the paper "Siting Renewable Generation Assets with Combinatoria
 
 https://dox.uliege.be/index.php/s/1XLvBJhaO106Cen
 
-TESTED VIA JULIA 1.4 & 1.5
+TESTED IN JULIA 1.4
 
 PACKAGE REQUIREMENTS:
 
 DelimitedFiles (Standard Library)
-StatsBase 0.32.0
+StatsBase v0.32.0
 StatsPlots v0.12.0 
 PyCall v1.91.4
 JuMP v0.20.2

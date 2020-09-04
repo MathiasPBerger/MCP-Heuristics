@@ -10,6 +10,7 @@ using StatsPlots
 
 include("optimisation_models.jl")
 include("MCP_heuristics.jl")
+include("submodularity_tester.jl")
 
 pickle = pyimport("pickle")
 
